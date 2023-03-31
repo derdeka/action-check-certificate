@@ -1,0 +1,25 @@
+name: 'Domain and SSL cert watcher'
+description: 'Watch SSL certs expiring for your domains'
+branding:
+  icon: 'alert-triangle'
+  color: 'gray-dark'
+
+inputs:
+  url:
+    description: 'Site domain to be checked (with protocol)'
+    required: true
+  max-cert-expire-days-left:
+    description: 'Fail action when cert-expire-days-left is below number of days'
+    required: false
+    default: 1
+
+outputs:
+  cert-expire-date:
+    description: 'SSL certificate expire date'
+
+  cert-expire-days-left:
+    description: 'SSL certificate expire number of days left'
+
+runs:
+  using: 'node16'
+  main: 'lib/index.js'
