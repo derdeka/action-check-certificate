@@ -1,0 +1,29 @@
+name: Test Action
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check certificate for github.com
+        id: check-cert
+        uses: ./
+        with:
+          url: https://github.com
+          max-cert-expire-days-left: 10
+
+      - name: Verify outputs
+        run: |
+          echo "Expire date: ${{ steps.check-cert.outputs.cert-expire-date }}"
+          echo "Days left: ${{ steps.check-cert.outputs.cert-expire-days-left }}"
+          if [ -z "${{ steps.check-cert.outputs.cert-expire-days-left }}" ]; then
+            echo "ERROR: cert-expire-days-left output is empty"
+            exit 1
+          fi
