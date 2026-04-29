@@ -1,6 +1,6 @@
-import { getInput, info, setFailed, setOutput } from '@actions/core';
 import { get } from 'node:https';
 import { PeerCertificate, TLSSocket } from 'node:tls';
+import { getInput, info, setFailed, setOutput } from './action-helper.js';
 
 const getCertificate = async (url: URL) => new Promise<PeerCertificate>((resolve, reject) => {
   get(url, { agent: false }, response => resolve((response.socket as TLSSocket).getPeerCertificate(false)))

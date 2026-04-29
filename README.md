@@ -1,7 +1,10 @@
 # derdeka/action-check-certificate
 
+[![test](https://github.com/derdeka/action-check-certificate/actions/workflows/test.yml/badge.svg)](https://github.com/derdeka/action-check-certificate/actions/workflows/test.yml)
+
 ## versions
 
+- `derdeka/action-check-certificate@v3` - using node24
 - `derdeka/action-check-certificate@v2` - using node20
 - `derdeka/action-check-certificate@v1` - using node16
 
@@ -30,7 +33,7 @@ jobs:
     steps:
       - name: Check domain SSL expire date
         id: check-certificate
-        uses: derdeka/action-check-certificate@v2
+        uses: derdeka/action-check-certificate@v3
         with:
           url: ${{ matrix.domain }}
           max-cert-expire-days-left: 10
